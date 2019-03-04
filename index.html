@@ -329,7 +329,7 @@
         });
                 
         $.each( tabletop.sheets("News").all(), function(i, news) {
-          var cat_li = $('<li><h4><a href="/news/index.html#news-article-'+news.ID+'"</a>' + news.Title + '</h4><p class="newsBlurb">'+ news.Blurb + '</p><a class="readmore" href="/news/index.html#news-article-'+news.ID+'">Read more</a></li>')
+          var cat_li = $('<li><h4><a href="/GCTC/news/index.html#news-article-'+news.ID+'"</a>' + news.Title + '</h4><p class="newsBlurb">'+ news.Blurb + '</p><a class="readmore" href="/news/index.html#news-article-'+news.ID+'">Read more</a></li>')
           //cat_li.append(news.Blurb);
           cat_li.appendTo("#cats");
           if (i == 2){
