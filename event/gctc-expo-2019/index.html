@@ -70,44 +70,31 @@
 	#intro .container, #intro .row {height: auto; position: relative;}
 	#dcConvention:hover{opacity:0.8;}
 
-  .inlineBlock {
-	display:inline-block;
-	max-width: 140px;
-	padding: 10px;
-	border: 1px solid #ebebeb;
-	max-height: 140px;
-	overflow: hidden;
-	min-height: 140px;
-	vertical-align: middle;
-}
-.inlineBlock img {
-    vertical-align: middle;
-    max-height: 58px;
-}
+
   #Logos {text-align: center;}
-#Logos a {
-    position: relative;    
-    height: 125px;
-    width: 100%;    
-    display: block;
-}
-#Logos img {
-    vertical-align: middle;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-}
-#Logos div[class*="col-"]{
-	float:none;
-	display:inline-block;
-}
-h3 {font-size: 180%;}
-@media (max-width: 480px) {
-  .customBtn{font-size:180%;text-align: center;padding:0.1em 1.3em;}
-}
+  #Logos a {
+      position: relative;    
+      height: 100px;
+      width: 100%;    
+      display: block;
+  }
+  #Logos img {
+      vertical-align: middle;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+  }
+  #Logos div[class*="col-"]{
+    float:none;
+    display:inline-block;
+  }
+  h3 {font-size: 180%;}
+  @media (max-width: 480px) {
+    .customBtn{font-size:180%;text-align: center;padding:0.1em 1.3em;}
+  }
 </style>
 </head>
 
@@ -237,7 +224,16 @@ h3 {font-size: 180%;}
 <div id="Expo2019" class="handlebars"><div class="loader">Loading...</div></div>
 <div class="container-fluid">
   <div class="row">
-      <div id="Logos"></div>
+      <div id="Logos">
+          
+          <div id="Hosts"><h3>Hosts</h3></div>
+          
+          <div id="Federal"><h3>U.S. Federal Agency Partners</h3></div>
+          
+          <div id="Partners"><h3>Partners</h3> </div>
+      </div>
+
+      
   </div>
 </div>
 <div id="Secondary"></div>
@@ -264,15 +260,7 @@ h3 {font-size: 180%;}
 </div>
 </script>
 
-<script id="logo-template" type="text/x-handlebars-template">
-      {{#if SectionHeading}}
-      <h3>{{SectionHeading}}</h3>
-      {{/if}}
-      {{#if Partners}}
-      <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1"><a href="{{Partners-URL}}" target="_blank"><img src="images/{{Partners}}"></a></div>
-      {{/if}}
-	
-</script>
+
 
 <script id="secondary-template" type="text/x-handlebars-template">
   <div class="container-fluid" id="cta">
@@ -299,7 +287,17 @@ h3 {font-size: 180%;}
   </div>
   </script>
   
-
+  <script id="host-template" type="text/x-handlebars-template">    
+    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1"><a href="{{HostsURL}}" target="_blank"><img src="images/{{Hosts}}"></a></div>    
+  </script>
+  <script id="federal-template" type="text/x-handlebars-template">    
+    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1"><a href="{{FedURL}}" target="_blank"><img src="images/{{Fed}}"></a></div>    
+  </script>
+  <script id="partner-template" type="text/x-handlebars-template">    
+    {{#if Partners}}
+    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1"><a href="{{PartnersURL}}" target="_blank"><img src="images/{{Partners}}"></a></div>    
+    {{/if}}
+  </script>
 
 
 <script type="text/javascript">
@@ -312,18 +310,25 @@ $(document).ready( function() {
 					 callback: showInfo,
 					 parseNumbers: true,
            simpleSheet: false,
-           wanted:["Homepage","PartnerLogos"] } );
+           wanted:["Homepage","PartnerLogos", "HostsLogos", "FederalLogos"] } );
 	});
 
   function showInfo(data, tabletop) {
   var source   = $("#cat-template").html();
   var template = Handlebars.compile(source);
 
-  var source2   = $("#logo-template").html();
-  var template2 = Handlebars.compile(source2);
-  
+  var hostSource   = $("#host-template").html();
+  var hostTemplate = Handlebars.compile(hostSource);
+
+  var federalSource   = $("#federal-template").html();
+  var federalTemplate = Handlebars.compile(federalSource);
+
+  var partnerSource   = $("#partner-template").html();
+  var partnerTemplate = Handlebars.compile(partnerSource);
+
   var source3   = $("#secondary-template").html();
   var template3 = Handlebars.compile(source3);
+
 
   $.each( tabletop.sheets("Homepage").all(), function(i, cat) {
 	  var html = template(cat);
@@ -331,29 +336,26 @@ $(document).ready( function() {
       $(".loader").hide();
 	});
 
+  $.each( tabletop.sheets("HostsLogos").all(), function(i, cat) {
+    var htmlHost = hostTemplate(cat);
+    $("#Hosts").append(htmlHost);
+  });
+
+  $.each( tabletop.sheets("FederalLogos").all(), function(i, cat) {
+    var htmlFedearl = federalTemplate(cat);
+    $("#Federal").append(htmlFedearl);
+  });
+
   $.each( tabletop.sheets("PartnerLogos").all(), function(i, cat) {
-    var html2 = template2(cat);
-    $("#Logos").append(html2);
+    var htmlPartners = partnerTemplate(cat);
+    $("#Partners").append(htmlPartners);
   });
 
   $.each( tabletop.sheets("Homepage").all(), function(i, cat) {
 	  var html3 = template3(cat);
       $("#Secondary").append(html3);      
 	});
-
- 
-
-
-/*
-	function showInfo(data, tabletop) {
-	var source   = $("#cat-template").html();
-	var template = Handlebars.compile(source);
-
-	$.each( tabletop.sheets("Homepage").all(), function(i, cat) {
-	  var html = template(cat);
-      $("#Expo2019").append(html);
-      $(".loader").hide();
-	});*/
+  
 	
 	if(window.location.hash) {
 
