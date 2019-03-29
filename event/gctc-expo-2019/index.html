@@ -225,12 +225,12 @@
 <div class="container-fluid">
   <div class="row">
       <div id="Logos">
-          
-          <div id="Hosts"><h3>Hosts</h3></div>
-          
-          <div id="Federal"><h3>U.S. Federal Agency Partners</h3></div>
-          
-          <div id="Partners"><h3>Partners</h3> </div>
+          <div id="Heading1"></div>
+          <div id="Hosts"></div>
+          <div id="Heading2"></div>
+          <div id="Federal"></div>
+          <div id="Heading3"></div>
+          <div id="Partners"></div>
       </div>
 
       
@@ -298,7 +298,15 @@
     <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1"><a href="{{PartnersURL}}" target="_blank"><img src="images/{{Partners}}"></a></div>    
     {{/if}}
   </script>
-
+  <script id="headings1-template" type="text/x-handlebars-template">    
+    <h3>{{Heading1}}</h3>
+  </script>
+  <script id="headings2-template" type="text/x-handlebars-template">    
+    <h3>{{Heading2}}</h3>
+  </script>
+  <script id="headings3-template" type="text/x-handlebars-template">    
+    <h3>{{Heading3}}</h3>
+  </script>
 
 <script type="text/javascript">
 //var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1QZycMk96Dp2mSdexAQXeb-lvqCiEcwHL3SgKQK_Df6U/pubhtml';
@@ -310,7 +318,7 @@ $(document).ready( function() {
 					 callback: showInfo,
 					 parseNumbers: true,
            simpleSheet: false,
-           wanted:["Homepage","PartnerLogos", "HostsLogos", "FederalLogos"] } );
+           wanted:["Homepage","PartnerLogos", "HostsLogos", "FederalLogos","LogoHeadings"] } );
 	});
 
   function showInfo(data, tabletop) {
@@ -328,6 +336,13 @@ $(document).ready( function() {
 
   var source3   = $("#secondary-template").html();
   var template3 = Handlebars.compile(source3);
+
+  var headings   = $("#headings1-template").html();
+  var headings1Template = Handlebars.compile(headings);
+  var headings   = $("#headings2-template").html();
+  var headings2Template = Handlebars.compile(headings);
+  var headings   = $("#headings3-template").html();
+  var headings3Template = Handlebars.compile(headings);
 
 
   $.each( tabletop.sheets("Homepage").all(), function(i, cat) {
@@ -353,8 +368,17 @@ $(document).ready( function() {
 
   $.each( tabletop.sheets("Homepage").all(), function(i, cat) {
 	  var html3 = template3(cat);
-      $("#Secondary").append(html3);      
+      $("#Secondary").append(html3);
 	});
+
+  $.each( tabletop.sheets("LogoHeadings").all(), function(i, cat) {
+    var htmlHeadings1 = headings1Template(cat);
+    var htmlHeadings2 = headings2Template(cat);
+    var htmlHeadings3 = headings3Template(cat);
+    $("#Heading1").append(htmlHeadings1);
+    $("#Heading2").append(htmlHeadings2);
+    $("#Heading3").append(htmlHeadings3);
+  });
   
 	
 	if(window.location.hash) {
