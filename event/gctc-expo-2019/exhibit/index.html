@@ -272,7 +272,7 @@
                    <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Action Clusters <span class="caret"></span></a>                    
                     <ul class="dropdown-menu">                      
-                        <li><a href="/GCTC/action-clusters-2018/">2018</a></li><li><a href="/GCTC/action-clusters-2017/">2017</a></li>                      
+                        <li><a href="/GCTC/action-clusters-2018-2019/">2018-2019</a></li><li><a href="/GCTC/action-clusters-2017/">2017</a></li>                      
                         <li><a href="/GCTC/action-clusters-2016/">2016</a></li>
                         <li><a href="/GCTC/team-building-and-matchmaking/">Team Building &amp; Matchmaking</a></li>
                     </ul>                    
@@ -368,18 +368,12 @@
 						<table id="searchable-table" cellpadding="5" cellspacing="0" border="0" width="100%"  class="cards">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th class="Sector">Sector</th>				
-                                    <th class="ActionCluster">Action Cluster</th>				
-                                    <th class="Year">Year</th>
-                                    <th class="MuniGov">Municipal Governments</th>
-                                    <th class="Members">Members</th>
-                                    <th class="TeamLead">Team Lead Name</th>
+                                    <th>ID</th>                                    
+                                    <th class="ActionCluster">Exhibitor Name</th>
+                                    <th class="Sector">Sector</th>
                                     <th class="Description">Description</th>
-                                    <th class="Website">External Website</th>
                                     <th class="Booth">Booth Number</th>
-                                    
-                                    
+                                    <th class="Website">External Website</th>
                                 </tr>
                             </thead>
                             <tbody id="content"><div class="loader">Loading...</div>
@@ -391,12 +385,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    
+                                    <th></th>                                    
                                 </tr>
                             </tfoot>
                         </table>
@@ -406,17 +395,12 @@
             <tr id="{{ID}}">				
 				<td class="IDnum"><span>id{{ID}}</span></td>
 				<td class="Sector" data-title="Sector:"><span>{{Sector}}</span></td>
-				<td class="ActionCluster" data-title="Action-Cluster:"><strong>Action Cluster:</strong> <strong>{{Action-Cluster}}</strong></td>
-				<td class="Year" data-title="Year:"><strong>Year:</strong> {{Year}}</td>
-				<td class="MuniGov" data-title="Municipal-Governments:"><strong>Municipal Governments</strong> {{Municipal-Governments}}</td>
-				<td class="Members" data-title="Members:"><strong>Members:</strong> {{Members}}</td>
-				<td class="TeamLead" data-title="Team-Lead-Name:"><strong>Team Lead:</strong> {{Team-Lead-Name}}</td>
-				<td class="Description" data-title="Description:"><strong>{{Descriptor}}</strong> {{Description}}</td>
-				<td class="Website" data-title="External-Web-Site:">
+				<td class="ActionCluster" data-title="Action-Cluster:"><strong>Exhibitor Name:</strong> <strong>{{Exhibitor-Name}}</strong></td>				
+				<td class="Description" data-title="Description:">{{Description}}</td>
+                <td class="Booth"><strong>Booth Number:</strong> {{Booth}}</td>
+                <td class="Website" data-title="External-Web-Site:">
 					<span class="WebsiteURL">{{enhance External-Web-Site}}</span>
-				</td>
-				<td class="Booth"><strong>Booth Number:</strong> {{Booth}}</td>
-				
+				</td>				
 			</tr>
 		{{/each}}
 		</script> 
